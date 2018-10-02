@@ -1,0 +1,19 @@
+<footer class="section footer">
+  <div class="container">
+    <div class="row no-gutter align-items-center justify-content-between">
+        <a class="navbar-brand" href="/">CoinNews Feed</a>
+        <div class="row nav-menu">
+          {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
+                  <a class="nav-link" href="{{ "/categories/" | relLangURL }}{{ $name | urlize }}">{{ $name }}</a>
+              {{ end }}
+        </div>
+        <div class="row no-gutter social-links">
+            <a class="navbar-link" href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+            <a class="navbar-link" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+            <a class="navbar-link" href="https://www.fb.com"><i class="fab fa-facebook-f"></i></a>
+        </div>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#emailModal">Subscribe</button>
+    </div>
+  </div>
+  {{ partial "modal" . }}
+</footer>

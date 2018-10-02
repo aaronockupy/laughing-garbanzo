@@ -1,0 +1,46 @@
+{{ define "main" }}
+<div class="cat-page">
+  <section class="cat-list">
+      <div class="container">
+        <div class="row infinite-scroll">
+                {{ range (.Paginator 8).Pages }}
+                <div class="row feed-row">
+                    <div class="col-6 col-lg-2 coin-title">
+                        <a href="{{ .Permalink }}">
+                          <figure>
+                            <img class="img-fluid" src="{{ .Params.featured_image }}"></img>
+                          </figure>
+                        </a>
+                          <h6 class="title"><a href="{{ .Permalink }}">{{ .Params.coin }}</a></h6>
+                    </div>
+                    <div class="col-6 col-lg-2 coin-info">
+                        <p>${{ .Params.coin_price }}</p>
+                        <p>{{ .Params.coin_price_change }}%</p>
+                        <div class="coin-links">
+                          <a class="social-links" href="https://twitter.com/?lang=en"><i class="fas fa-globe-americas"></i></a>
+                          <a class="social-links" href="https://twitter.com/?lang=en"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 article-info">
+                      <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+                      <p>{{ .Params.description }}</p>
+                      <ul class="feed-tags">
+                        {{ range .Params.tags }}
+                          <li><a href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}">#{{ . }}</a> </li>
+                        {{ end }}
+                      </ul>
+                    </div>
+                  </div>
+                  <hr></hr>
+
+
+                {{ end }}
+        </div>
+      </div>
+      {{ if .Paginator.HasNext }}
+          <a href="{{ .Paginator.Next.URL }}" class="pagination__next"></a>
+          <button class="view-more-button"><br />View more<br /></button>
+      {{ end }}
+  </section>
+</div>
+{{ end }}

@@ -1,0 +1,85 @@
+{{ define "main" }}
+<div class="single-page">
+  <article class="summary">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="author-box">
+            <figure>
+              <img class="img-fluid" src="{{ .Params.featured_image }}"></img>
+            </figure>
+              <p>{{ .Params.Author }}</p>
+              <!--insert author bio below-->
+              <h3>Author Quote or Blurb</h3>
+              <div class="author-links">
+                <a class="social-links" href="https://twitter.com/?lang=en"><i class="fas fa-globe-americas"></i></a>
+                <a class="social-links" href="https://twitter.com/?lang=en"><i class="fab fa-twitter"></i></a>
+              </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="snippet">
+            <h1 class="feature-title">{{ .Title }}</h1>
+            <p> {{ .Params.Description }} </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+<article>
+  <div class="article-wrap">
+    <h1 class="feature-title">{{ .Title }}</h1>
+    <div class="article-content">
+      {{ .Content }}
+    </div>
+    <div class="page-nav pagination">
+        {{ with .PrevInSection }}
+          <a class="previous page-item btn btn-primary" href="{{.Permalink}}">Previous</a>
+        {{ end }}
+        {{ with .NextInSection }}
+          <a class="next page-item btn btn-primary" href="{{.Permalink}}">Next</a>
+        {{ end }}
+    </div>
+  </div>
+      {{ $related := .Site.RegularPages.Related . | first 3 }}
+      {{ with $related }}
+      <span class="seperator"></span>
+      <div class="related-content">
+      	{{ range . }}
+        <div class="row feed-row">
+            <div class="col-6 col-lg-2 coin-title">
+                <a href="{{ .Permalink }}">
+                  <figure>
+                    <img class="img-fluid" src="{{ .Params.featured_image }}"></img>
+                  </figure>
+                </a>
+
+            </div>
+            <div class="col-6 col-lg-2 coin-info">
+              <h6 class="title"><a href="{{ .Permalink }}">{{ .Params.coin }}</a></h6>
+                <p>${{ .Params.coin_price }}</p>
+                <p>{{ .Params.coin_price_change }}%</p>
+                <div class="coin-links">
+                  <a class="social-links" href="https://twitter.com/?lang=en"><i class="fas fa-globe-americas"></i></a>
+                  <a class="social-links" href="https://twitter.com/?lang=en"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-8 article-info">
+              <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+              <p>{{ .Params.description }}</p>
+              <ul class="feed-tags">
+                {{ range .Params.tags }}
+                  <li><a href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}">#{{ . }}</a> </li>
+                {{ end }}
+              </ul>
+            </div>
+          </div>
+          <hr></hr>
+      	{{ end }}
+      </div>
+      {{ end }}
+
+</article>
+  </div>
+{{ end }}

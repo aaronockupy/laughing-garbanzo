@@ -1,0 +1,4 @@
+baseURL = "/"
+languageCode = "en-us"
+title = "Coin News Feed"
+theme = "cnf"

@@ -1,0 +1,8 @@
+name = "Coin News Feed"
+license = "MIT"
+description = "Just for Coin News Feed"
+homepage = "https://supersweetsites.com"
+min_version = 0.1
+
+[author]
+  name = "Aaron"
